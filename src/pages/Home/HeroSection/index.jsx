@@ -35,10 +35,10 @@ const HeroSection = () => {
             autoplay={{ delay: 3000 }}
             className={styles.image}
           >
-            {images.map((items) => {
+            {images.map((item, index) => {
               return (
-                <SwiperSlide>
-                  <img src={items} />
+                <SwiperSlide key={index}>
+                  <img src={item} />
                 </SwiperSlide>
               );
             })}

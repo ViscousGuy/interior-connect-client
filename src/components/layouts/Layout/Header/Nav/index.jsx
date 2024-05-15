@@ -49,7 +49,7 @@ const Navbar = ({ handleShow }) => {
         <ul className={styles.links}>
           {navData.map((option) => {
             return (
-              <li>
+              <li key={option.id}>
                 <NavLink to={`/${option.value}`} className={styles.link}>
                   {option.name}
                 </NavLink>
