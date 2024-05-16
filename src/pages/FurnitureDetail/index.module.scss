@@ -130,6 +130,70 @@
             }
           }
         }
+        // Contractor Section Styles
+        .contractorSection {
+          margin-top: 1.5rem; // Optional: Add spacing above the section
+
+          .title {
+            font-family: $font-f-secondary;
+            font-weight: $font-w-400;
+            font-size: 14px; // Adjust as needed
+            color: $c-primary;
+            margin-bottom: 0.5rem; // Add some space below the title
+          }
+
+          .contractorName {
+            font-family: $font-f-primary;
+            font-weight: $font-w-700;
+            font-size: 16px; // Adjust as needed
+            color: $c-link-primary; // Or use another color variable
+
+            // Add hover effect if desired
+            &:hover {
+              color: $c-link-hover;
+              text-decoration: underline;
+            }
+          }
+        }
+        // Tags Section Styles
+        .tagsSection {
+          display: flex;
+          flex-direction: column; // Stack the tags vertically
+          gap: 1rem;
+          margin-top: 1rem;
+        }
+
+        .tagGroup {
+          // Container for label and tag
+          display: flex;
+          align-items: center;
+          gap: 0.5rem; // Space between label and tag
+        }
+
+        .tagLabel {
+          font-family: $font-f-secondary;
+          font-weight: $font-w-400;
+          font-size: 12px; // Adjust font size as needed
+          color: $c-subTitle; // Or any other suitable color variable
+        }
+
+        .tag {
+          padding: 0.5rem 1rem;
+          border-radius: 15px;
+          font-family: $font-f-secondary;
+          font-weight: $font-w-700;
+          font-size: 12px;
+          color: $c-secondary;
+        }
+
+        .tagFurnitureType {
+          background-color: $c-title;
+        }
+
+        .tagRoomType {
+          background-color: $c-detail;
+        }
+
         .sizeContainer {
           .title {
             font-family: $font-f-secondary;
@@ -141,6 +205,23 @@
           }
 
           .categories {
+            .swatchContainer {
+              display: flex;
+              gap: 1rem;
+            }
+            .colorSwatch {
+              width: 30px;
+              height: 30px;
+              border-radius: 50%; // Make it round
+              cursor: pointer;
+              border: 2px solid transparent; // Border for active state
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow (optional)
+            }
+
+            .activeSwatch {
+              border-color: $c-title; // Highlight active swatch
+            }
+
             display: flex;
             align-items: center;
             justify-content: space-between;

@@ -9,6 +9,7 @@ import Spinner from "../../components/components/Spinner";
 const FurnitureDetail = () => {
   const { furniture, isLoading } = useAppSelector((state) => state.furniture);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [activeColorId, setActiveColorId] = useState(null);
 
   const dispatch = useAppDispatch();
   const { slug } = useParams();
@@ -20,6 +21,10 @@ const FurnitureDetail = () => {
   };
   const handleImageClick = (index) => {
     setActiveImageIndex(index);
+  };
+
+  const handleSwatchClick = (colorId) => {
+    setActiveColorId(colorId);
   };
 
   useEffect(() => {
@@ -87,27 +92,67 @@ const FurnitureDetail = () => {
               <div className={styles.title}>{furniture.Name}</div>
               <div className={styles.subHeading}>{furniture.Description}</div>
             </div>
+            {/* Contractor Section */}
+            {furniture.Contractor && (
+              <div className={styles.contractorSection}>
+                <div className={styles.title}>Crafted by:</div>
+                <Link
+                  to={`/contractors/${furniture.Contractor.Slug}`}
+                  className={styles.contractorName}
+                >
+                  {furniture.Contractor.Firstname}{" "}
+                  {furniture.Contractor.Lastname}
+                </Link>
+              </div>
+            )}
+
             <div className={styles.sizeContainer}>
               <div className={styles.title}>Color(s):</div>
               <div className={styles.categories}>
-                <div className={styles.buttonContainer}>
-                  {furniture.FurnitureColor?.map((item) => {
-                    return (
-                      <div className={styles.button}>
-                        <input type="radio" id={item} name="color" />
-                        <label className="btn btn-default" htmlFor={item}>
-                          {item.Name}
-                        </label>
-                      </div>
-                    );
-                  })}
+                <div className={styles.swatchContainer}>
+                  {" "}
+                  {/* Use new container */}
+                  {furniture.FurnitureColor?.map((item) => (
+                    <div
+                      key={item.Id}
+                      className={`${styles.colorSwatch} ${
+                        activeColorId === item.Color.Id
+                          ? styles.activeSwatch
+                          : ""
+                      }`}
+                      style={{ backgroundColor: item.Color.Name.toLowerCase() }} // Set background color
+                      onClick={() => handleSwatchClick(item.Color.Id)}
+                    ></div>
+                  ))}
                 </div>
               </div>
             </div>
+
             <div className={styles.priceContainer}>
               <div className={styles.title}>Price:</div>
               <div className={styles.price}>₹{furniture.Price}</div>
             </div>
+            {/* Tags Section */}
+            {furniture && furniture.FurnitureType && furniture.RoomType && (
+              <div className={styles.tagsSection}>
+                {/* Furniture Type Tag */}
+                <div className={styles.tagGroup}>
+                  <span className={styles.tagLabel}>Furniture Type:</span>
+                  <div className={`${styles.tag} ${styles.tagFurnitureType}`}>
+                    {furniture.FurnitureType.Name}
+                  </div>
+                </div>
+
+                {/* Room Type Tag */}
+                <div className={styles.tagGroup}>
+                  <span className={styles.tagLabel}>Room Type:</span>
+                  <div className={`${styles.tag} ${styles.tagRoomType}`}>
+                    {furniture.RoomType.Name}
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className={styles.addToCartContainer}>
               <div
                 className={styles.addToCart}
@@ -116,7 +161,7 @@ const FurnitureDetail = () => {
                 {isLoadingFurniture ? (
                   <Spinner className={"addToCartSm"} />
                 ) : (
-                  "Add to Cart"
+                  "Buy Now"
                 )}
               </div>
               <Link to={`/furnitures`} className={styles.continueShopping}>
