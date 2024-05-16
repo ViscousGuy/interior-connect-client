@@ -6,6 +6,7 @@ import {
   Furniture,
   FurnitureDetail,
   Contractor,
+  ContractorDetail
 } from "../pages";
 
 export const router = createBrowserRouter([
@@ -29,11 +30,10 @@ export const router = createBrowserRouter([
         path: "contractors",
         element: <Contractor />,
       },
-      // {
-      //   path: "contractors/:slug",
-      //   element: <ContractorDetail />,
-      // },
-
+      {
+        path: "contractors/:slug",
+        element: <ContractorDetail />,
+      },
       {
         path: "*",
         element: <NotFound />,

@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getSingleFurniture } from "../../features/furniture/furnitureSlice";
@@ -42,14 +43,12 @@ const FurnitureDetail = () => {
     <section className={styles.section}>
       <div className={`${styles.container} main-container`}>
         <p className={styles.section_title_bottom}>
-          {route?.map((item, index) => {
-            return (
-              <Link to={item.route}>
-                {item.name}
-                {index < 2 && <span>&nbsp;&gt;&nbsp;</span>}
-              </Link>
-            );
-          })}
+          {route?.map((item, index) => (
+            <React.Fragment key={index}>
+              <Link to={item.route}>{item.name}</Link>
+              {index < 2 && <span>&nbsp;&gt;&nbsp;</span>}
+            </React.Fragment>
+          ))}
         </p>
         <div className={styles.productContainer}>
           <div className={styles.productImageContainer}>
@@ -112,9 +111,9 @@ const FurnitureDetail = () => {
                 <div className={styles.swatchContainer}>
                   {" "}
                   {/* Use new container */}
-                  {furniture.FurnitureColor?.map((item) => (
+                  {furniture.FurnitureColor?.map((item, index) => (
                     <div
-                      key={item.Id}
+                      key={index}
                       className={`${styles.colorSwatch} ${
                         activeColorId === item.Color.Id
                           ? styles.activeSwatch
