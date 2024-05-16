@@ -29,14 +29,14 @@ const FurnitureCard = ({ id, title, price, description, image, slug }) => {
     >
       <div className={styles.productItem}>
         <div className={styles.productPic}>
-          <Link to={`/furnitures/${String(slug)}`}>
+          <Link to={`/furnitures/${slug}`}>
             <img src={image} alt={title} />
           </Link>
         </div>
       </div>
       <div className={styles.productDetailsContainer}>
         <Link
-          to={`/furnitures/${String(slug)}`}
+          to={`/furnitures/${slug}`}
           className={styles.productDetailsWrapper}
         >
           <div className={styles.productDetails}>

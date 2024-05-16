@@ -2,16 +2,20 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import furnitureService from "./furnitureService";
 import { toast } from "react-toastify";
 
+function errorService(error) {
+  let errorMessage = "An unknown error occurred."; // Default message
+  if (error.response && error.response.data && error.response.data.message) {
+    errorMessage = error.response.data.message; // Extract server error if available
+  } else if (error.message) {
+    errorMessage = error.message; // Generic error message
+  }
+
+  return errorMessage;
+}
+
 const initialState = {
   furnitures: [],
-  // furniture: {
-  //   category: "",
-  //   description: "",
-  //   id: 0,
-  //   image: "",
-  //   price: 0,
-  //   title: "",
-  // },
+  furniture: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -24,19 +28,22 @@ export const getFurnitures = createAsyncThunk(
     try {
       return await furnitureService.getFurnitures();
     } catch (error) {
-      let errorMessage = "An unknown error occurred."; // Default message
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        errorMessage = error.response.data.message; // Extract server error if available
-      } else if (error.message) {
-        errorMessage = error.message; // Generic error message
-      }
-
+      let errorMessage = errorService(error);
       toast.error(errorMessage); // Display the error toast immediately
       return thunkAPI.rejectWithValue(errorMessage); // Pass the error message
+    }
+  }
+);
+
+export const getSingleFurniture = createAsyncThunk(
+  "furnitures/getFurniture",
+  async (slug, thunkAPI) => {
+    try {
+      return await furnitureService.getSingleFurniture(slug);
+    } catch (error) {
+      let errorMessage = errorService(error);
+      toast.error(errorMessage); // Display the error toast immediately
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -64,6 +71,23 @@ export const furnitureSlice = createSlice({
         state.isError = true;
         state.status = "error";
         toast.error(state.status);
+      })
+      .addCase(getSingleFurniture.pending, (state) => {
+        state.isLoading = true;
+        state.status = "loading";
+      })
+      .addCase(getSingleFurniture.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.furniture = action.payload;
+        state.status = "idle";
+      })
+      .addCase(getSingleFurniture.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.status = "error";
+        toast.error(state.status);
+
       });
   },
 });
