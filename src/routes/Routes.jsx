@@ -1,6 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import { Home, NotFound, Furniture, FurnitureDetail } from "../pages";
+import {
+  Home,
+  NotFound,
+  Furniture,
+  FurnitureDetail,
+  Contractor,
+} from "../pages";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +25,15 @@ export const router = createBrowserRouter([
         path: "furnitures/:slug",
         element: <FurnitureDetail />,
       },
+      {
+        path: "contractors",
+        element: <Contractor />,
+      },
+      // {
+      //   path: "contractors/:slug",
+      //   element: <ContractorDetail />,
+      // },
+
       {
         path: "*",
         element: <NotFound />,

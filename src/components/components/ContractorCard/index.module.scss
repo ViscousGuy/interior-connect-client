@@ -1,0 +1,44 @@
+.contractorItem {
+    width: 100%;
+    padding: 10px 10px 0 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contractorDetailsWrapper {
+    padding: 10px;
+    text-decoration: none;
+    color: inherit;
+  
+    &:hover {
+      color: $c-title;
+    }
+  }
+  
+  .contractorDetails {
+    .contractorName {
+      font-family: "Poppins";
+      font-weight: $font-w-700;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+  
+    .contractorLocation {
+      font-family: "Poppins";
+      font-weight: $font-w-400;
+      font-size: 14px;
+      color: $c-subTitle;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .contractorItem {
+      padding: 20px;
+    }
+  }
+  

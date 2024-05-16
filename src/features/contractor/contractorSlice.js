@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import furnitureService from "./furnitureService";
+import contractorService from "./contractorService";
 import { toast } from "react-toastify";
 
 function errorService(error) {
@@ -14,19 +14,19 @@ function errorService(error) {
 }
 
 const initialState = {
-  furnitures: [],
-  furniture: {},
+  contractors: [],
+  contractor: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
   status: "",
 };
 
-export const getFurnitures = createAsyncThunk(
-  "furnitures/getAll",
+export const getContractors = createAsyncThunk(
+  "contractors/getAll",
   async (_, thunkAPI) => {
     try {
-      return await furnitureService.getFurnitures();
+      return await contractorService.getContractors();
     } catch (error) {
       let errorMessage = errorService(error);
       toast.error(errorMessage); // Display the error toast immediately
@@ -35,11 +35,11 @@ export const getFurnitures = createAsyncThunk(
   }
 );
 
-export const getSingleFurniture = createAsyncThunk(
-  "furnitures/getFurniture",
+export const getSingleContractor = createAsyncThunk(
+  "contractors/getContractor",
   async (slug, thunkAPI) => {
     try {
-      return await furnitureService.getSingleFurniture(slug);
+      return await contractorService.getSingleContractor(slug);
     } catch (error) {
       let errorMessage = errorService(error);
       toast.error(errorMessage); // Display the error toast immediately
@@ -48,49 +48,48 @@ export const getSingleFurniture = createAsyncThunk(
   }
 );
 
-export const furnitureSlice = createSlice({
-  name: "furnitures",
+export const contractorSlice = createSlice({
+  name: "contractors",
   initialState,
   reducers: {
-    furnitureReset: () => initialState,
+    contractorReset: () => initialState,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getFurnitures.pending, (state) => {
+      .addCase(getContractors.pending, (state) => {
         state.isLoading = true;
         state.status = "loading";
       })
-      .addCase(getFurnitures.fulfilled, (state, action) => {
+      .addCase(getContractors.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.furnitures = action.payload;
+        state.contractors = action.payload;
         state.status = "idle";
       })
-      .addCase(getFurnitures.rejected, (state) => {
+      .addCase(getContractors.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
         state.status = "error";
         toast.error(state.status);
       })
-      .addCase(getSingleFurniture.pending, (state) => {
+      .addCase(getSingleContractor.pending, (state) => {
         state.isLoading = true;
         state.status = "loading";
       })
-      .addCase(getSingleFurniture.fulfilled, (state, action) => {
+      .addCase(getSingleContractor.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.furniture = action.payload;
+        state.contractor = action.payload;
         state.status = "idle";
       })
-      .addCase(getSingleFurniture.rejected, (state) => {
+      .addCase(getSingleContractor.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
         state.status = "error";
         toast.error(state.status);
-
       });
   },
 });
 
-export const { furnitureReset } = furnitureSlice.actions;
-export default furnitureSlice.reducer;
+export const { contractorReset } = contractorSlice.actions;
+export default contractorSlice.reducer;
