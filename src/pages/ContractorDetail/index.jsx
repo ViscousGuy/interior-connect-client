@@ -42,20 +42,20 @@ const ContractorDetail = () => {
 
         <div className={styles.contractorContainer}>
           <div className={styles.contractorImageContainer}>
-            {contractor.furniture && contractor.furniture.length > 0 ? (
-              contractor.furniture.map((furniture, index) => (
-                <div
-                  key={index}
-                  className={styles.placeholderImage}
-                  style={{
-                    width: furniture.dimensions.split("x")[0] + "px",
-                    height: furniture.dimensions.split("x")[1] + "px",
-                  }}
-                />
-              ))
+            {contractor.projects && contractor.projects.length > 0 ? (
+              contractor.projects.flatMap((project, projectIndex) =>
+                project.images.map((image, imageIndex) => (
+                  <img
+                    key={`${projectIndex}-${imageIndex}`}
+                    className={styles.image}
+                    src={image.imagePath}
+                    alt={`Project ${project.name}`}
+                  />
+                ))
+              )
             ) : (
               <div className={styles.noFurnitureMessage}>
-                No furniture available for this contractor.
+                No projects available for this contractor.
               </div>
             )}
           </div>

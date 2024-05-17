@@ -29,6 +29,15 @@
         justify-content: center;
         gap: 1rem;
 
+        .image {
+          max-width: 20rem;
+          max-height: 20rem;
+          object-fit: contain;
+          background-color: $c-secondary;
+          border-radius: 20px;
+          padding: 1rem;
+        }
+
         .placeholderImage {
           background-color: $c-secondary;
           border-radius: 20px;
@@ -43,15 +52,6 @@
           padding: 1rem;
           background-color: $c-secondary;
           border-radius: 20px;
-        }
-
-        .image {
-          max-width: 20rem;
-          max-height: 20rem;
-          object-fit: contain;
-          background-color: $c-secondary;
-          border-radius: 20px;
-          padding: 1rem;
         }
       }
 
