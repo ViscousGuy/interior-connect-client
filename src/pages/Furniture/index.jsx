@@ -47,7 +47,7 @@ const Furniture = () => {
         <BiSearch className={styles.searchIcon} />
         <input
           type="text"
-          placeholder="Search furniture"
+          placeholder="Search Furniture by name"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className={styles.searchInput}
