@@ -6,13 +6,18 @@ import {
   Furniture,
   FurnitureDetail,
   Contractor,
-  ContractorDetail
+  ContractorDetail,
 } from "../pages";
+import ErrorBoundary from "../ErrorBoundary";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
+    ),
     children: [
       {
         path: "",
