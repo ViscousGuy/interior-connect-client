@@ -51,23 +51,23 @@ To set up the project on your local machine, follow these steps:
 ## Application Routes
 
 ### Home Page
-![Home Page](public\home_page.png)
+![Home Page](screenshots\home_page.png)
 
 ### Furniture Page
-![Furniture Page](public\furniture_page.png)
+![Furniture Page](screenshots\furniture_page.png)
 
 ### Furniture Detail Page
-![Furniture Detail](public\furnituredetail_page.png)
+![Furniture Detail](screenshots\furnituredetail_page.png)
 
 ### Contractor Page
-![Contractor Page](public\contractor_page.png)
+![Contractor Page](screenshots\contractor_page.png)
 
 ### Contractor Detail Page
-![Contractor Detail]((public\contractordetail_page.png))
+![Contractor Detail](screenshots\contractordetail_page.png)
 
 
 ### Not Found Page
-![Not Found Page]((public\notfound_page.png))
+![Not Found Page](screenshots\notfound_page.png)
 
 
 
