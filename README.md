@@ -43,35 +43,34 @@ To set up the project on your local machine, follow these steps:
 
 ## Technology Stack
 
--   **JavaScript**: For dynamic and interactive elements.
+-   **React**: For dynamic and interactive elements.
 -   **SCSS**: For modern and maintainable stylesheets.
--   **HTML**: For structuring the web content.
 -   **Vite**: As the build tool for a faster and leaner development experience.
 
 ## Application Routes
 
 ### Home Page
-![Home Page](screenshots\home_page.png)
+![Home Page](screenshots/home_page.png)
 
 ### Furniture Page
-![Furniture Page](screenshots\furniture_page.png)
+![Furniture Page](screenshots/furniture_page.png)
 
 ### Furniture Detail Page
-![Furniture Detail](screenshots\furnituredetail_page.png)
+![Furniture Detail](screenshots/furnituredetail_page.png)
 
 ### Contractor Page
-![Contractor Page](screenshots\contractor_page.png)
+![Contractor Page](screenshots/contractor_page.png)
 
 ### Contractor Detail Page
-![Contractor Detail](screenshots\contractordetail_page.png)
+![Contractor Detail](screenshots/contractordetail_page.png)
 
 
 ### Not Found Page
-![Not Found Page](screenshots\notfound_page.png)
+![Not Found Page](screenshots/notfound_page.png)
 
 
 
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/ViscousGuy/interior-connect-client/blob/main/LICENSE) file for details.
