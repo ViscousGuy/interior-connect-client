@@ -1,7 +1,9 @@
 import axiosConfig from "../../app/axiosConfig";
 
-const getFurnitures = async () => {
-  const response = await axiosConfig.get("furnitures");
+const getFurnitures = async (page = 1, limit = 10) => {
+  const response = await axiosConfig.get(
+    `furnitures?page=${page}&limit=${limit}`
+  );
   return response.data;
 };
 
@@ -11,10 +13,9 @@ const getSingleFurniture = async (slug) => {
   return response.data;
 };
 
-
 const furnitureService = {
   getFurnitures,
-  getSingleFurniture
+  getSingleFurniture,
 };
 
 export default furnitureService;

@@ -1,0 +1,19 @@
+.colorFilter {
+  .colorOptions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    .colorOption {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+
+      &.selected {
+        border-color: $c-title;
+      }
+    }
+  }
+}
