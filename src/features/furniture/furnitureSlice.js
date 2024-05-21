@@ -70,7 +70,6 @@ export const furnitureSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.status = "error";
-        toast.error(state.status);
       })
       .addCase(getSingleFurniture.pending, (state) => {
         state.isLoading = true;

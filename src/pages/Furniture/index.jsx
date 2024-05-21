@@ -2,8 +2,12 @@ import { useNavigate, useParams } from "react-router";
 import styles from "./index.module.scss";
 import FurnitureCard from "../../components/components/FurnitureCard";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { getFurnitures } from "../../features/furniture/furnitureSlice";
+import {
+  getFurnitures,
+  furnitureReset,
+} from "../../features/furniture/furnitureSlice";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { navData } from "../../data/navItems";
 import Spinner from "../../components/components/Spinner";
 // import GoToTop from "../../components/components/GoToTop";
@@ -13,7 +17,9 @@ import { MdArrowBack } from "react-icons/md";
 import { BiSearch } from "react-icons/bi";
 
 const Furniture = () => {
-  const { furnitures, isLoading } = useAppSelector((state) => state.furniture);
+  const { furnitures, isLoading, isError } = useAppSelector(
+    (state) => state.furniture
+  );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
@@ -53,7 +59,11 @@ const Furniture = () => {
 
   useEffect(() => {
     dispatch(getFurnitures());
-  }, []);
+    // Cleanup function to reset the component state
+    return () => {
+      dispatch(furnitureReset());
+    };
+  }, [dispatch]);
   useEffect(() => {
     const filterFurniture = () => {
       let filtered = furnitures.filter((furniture) =>
@@ -76,6 +86,18 @@ const Furniture = () => {
   ).map((color) => color);
 
   if (isLoading) return <Spinner />;
+  if (isError)
+    return (
+      <div className={styles.errorWrapper}>
+        <div className={styles.errorContainer}>
+          <h2 className={styles.errorTitle}>Error</h2>
+          <p className={styles.errorMessage}>Error fetching Furnitures data</p>
+          <Link to="/" className={styles.errorLink}>
+            Go to Home Page
+          </Link>
+        </div>
+      </div>
+    );
 
   return (
     <div className={`${styles.container} main-container`}>

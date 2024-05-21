@@ -70,7 +70,6 @@ export const contractorSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.status = "error";
-        toast.error(state.status);
       })
       .addCase(getSingleContractor.pending, (state) => {
         state.isLoading = true;

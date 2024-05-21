@@ -2,8 +2,12 @@ import { useNavigate } from "react-router";
 import styles from "./index.module.scss";
 import ContractorCard from "../../components/components/ContractorCard";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { getContractors } from "../../features/contractor/contractorSlice";
+import {
+  contractorReset,
+  getContractors,
+} from "../../features/contractor/contractorSlice";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { navData } from "../../data/navItems";
 import Spinner from "../../components/components/Spinner";
 import Button from "../../components/components/Button";
@@ -12,7 +16,7 @@ import { BiSearch } from "react-icons/bi";
 import VerificationFilter from "../../components/components/VerificationFilter";
 
 const Contractor = () => {
-  const { contractors, isLoading } = useAppSelector(
+  const { contractors, isLoading, isError } = useAppSelector(
     (state) => state.contractor
   );
   const dispatch = useAppDispatch();
@@ -29,6 +33,10 @@ const Contractor = () => {
 
   useEffect(() => {
     dispatch(getContractors());
+    // Cleanup function to reset the component state
+    return () => {
+      dispatch(contractorReset());
+    };
   }, [dispatch]);
 
   useEffect(() => {
@@ -60,6 +68,18 @@ const Contractor = () => {
   }, [searchQuery, contractors, filterVerified]);
 
   if (isLoading) return <Spinner />;
+  if (isError)
+    return (
+      <div className={styles.errorWrapper}>
+        <div className={styles.errorContainer}>
+          <h2 className={styles.errorTitle}>Error</h2>
+          <p className={styles.errorMessage}>Error fetching Contractors data</p>
+          <Link to="/" className={styles.errorLink}>
+            Go to Home Page
+          </Link>
+        </div>
+      </div>
+    );
 
   return (
     <div className={`${styles.container} main-container`}>
