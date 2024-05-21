@@ -39,7 +39,7 @@ To set up the project on your local machine, follow these steps:
 -   **Contractor Search**: Implemented search functionality on the contractor page to help users find the right professional for their project.
 -   **Furniture Search**: Added search functionality on the furniture page, allowing users to filter through a wide range of furniture options.
 -   **Responsive Design**: Ensures a seamless experience across various devices and screen sizes.
--   **Upcoming**: Integration of advanced filters to refine search results further.
+-   **Filters**: Integration of advanced filters to refine search results further.
 
 ## Technology Stack
 
