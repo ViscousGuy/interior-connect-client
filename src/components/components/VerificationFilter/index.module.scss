@@ -1,0 +1,19 @@
+.verificationFilter {
+  .verificationOptions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    .verificationOption {
+      padding: 0.5rem 1rem;
+      background-color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@ import Spinner from "../../components/components/Spinner";
 import Button from "../../components/components/Button";
 import { MdArrowBack } from "react-icons/md";
 import { BiSearch } from "react-icons/bi";
+import VerificationFilter from "../../components/components/VerificationFilter";
 
 const Contractor = () => {
   const { contractors, isLoading } = useAppSelector(
@@ -18,6 +19,13 @@ const Contractor = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredContractors, setFilteredContractors] = useState([]);
+  const [filterVerified, setFilterVerified] = useState(null);
+
+  const resetFilters = () => {
+    setSearchQuery("");
+    setFilterVerified(null);
+    setFilteredContractors(contractors);
+  };
 
   useEffect(() => {
     dispatch(getContractors());
@@ -25,7 +33,7 @@ const Contractor = () => {
 
   useEffect(() => {
     const filterContractors = () => {
-      const filtered = contractors.filter(
+      let filtered = contractors.filter(
         (contractor) =>
           contractor.firstname
             .toLowerCase()
@@ -38,11 +46,18 @@ const Contractor = () => {
             searchQuery.toLowerCase()
           )
       );
+
+      if (filterVerified !== null) {
+        filtered = filtered.filter(
+          (contractor) => contractor.verified === filterVerified
+        );
+      }
+
       setFilteredContractors(filtered);
     };
 
     filterContractors();
-  }, [searchQuery, contractors]);
+  }, [searchQuery, contractors, filterVerified]);
 
   if (isLoading) return <Spinner />;
 
@@ -66,17 +81,27 @@ const Contractor = () => {
           className={styles.searchInput}
         />
       </div>
-      <div className={styles.contractorList}>
-        {filteredContractors.map((contractor) => (
-          <ContractorCard
-            key={contractor.id}
-            id={contractor.id}
-            name={`${contractor.firstname} ${contractor.lastname}`}
-            city={contractor.city}
-            state={contractor.state}
-            slug={contractor.slug}
-          />
-        ))}
+
+      <div className={styles.mainContent}>
+        <div className={styles.sidebar}>
+          <div className={styles.filterLabel}>Filter(s)</div>
+          <VerificationFilter setFilterVerified={setFilterVerified} />
+          <div className={styles.resetFilter} onClick={resetFilters}>
+            Reset
+          </div>
+        </div>
+        <div className={styles.contractorList}>
+          {filteredContractors.map((contractor) => (
+            <ContractorCard
+              key={contractor.id}
+              id={contractor.id}
+              name={`${contractor.firstname} ${contractor.lastname}`}
+              city={contractor.city}
+              state={contractor.state}
+              slug={contractor.slug}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

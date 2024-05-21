@@ -44,6 +44,13 @@ const Furniture = () => {
     });
   };
 
+  const resetFilters = () => {
+    setSearchQuery("");
+    setSortOrder("asc");
+    setSelectedColors([]);
+    setFilteredFurniture(furnitures);
+  };
+
   useEffect(() => {
     dispatch(getFurnitures());
   }, []);
@@ -108,7 +115,11 @@ const Furniture = () => {
             selectedColors={selectedColors}
             setSelectedColors={setSelectedColors}
           />
+          <div className={styles.resetFilter} onClick={resetFilters}>
+            Reset
+          </div>
         </div>
+
         <div className={styles.productList}>
           {filteredFurniture?.map((furniture) => {
             return (
