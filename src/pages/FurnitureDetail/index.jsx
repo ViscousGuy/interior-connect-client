@@ -1,14 +1,19 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { getSingleFurniture } from "../../features/furniture/furnitureSlice";
+import {
+  getSingleFurniture,
+  furnitureReset,
+} from "../../features/furniture/furnitureSlice";
 import styles from "./index.module.scss";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/components/Spinner";
 
 const FurnitureDetail = () => {
-  const { furniture, isLoading } = useAppSelector((state) => state.furniture);
+  const { furniture, isLoading, isError } = useAppSelector(
+    (state) => state.furniture
+  );
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [activeColorId, setActiveColorId] = useState(null);
 
@@ -30,13 +35,30 @@ const FurnitureDetail = () => {
 
   useEffect(() => {
     dispatch(getSingleFurniture(slug));
-  }, []);
+    // Cleanup function to reset the component state
+    return () => {
+      dispatch(furnitureReset());
+    };
+  }, [slug, dispatch]);
   const route = [
     { name: "Home", route: "/" },
     { name: "Furnitures", route: "/furnitures" },
     { name: "Furniture Details", route: `/furnitures/${slug}` },
   ];
   if (isLoading) return <Spinner />;
+  if (isError)
+    return (
+      <div className={styles.errorWrapper}>
+        <div className={styles.errorContainer}>
+          <h2 className={styles.errorTitle}>Error</h2>
+          <p className={styles.errorMessage}>Error fetching furniture data</p>
+          <Link to="/furnitures" className={styles.errorLink}>
+            Go to Furnitures Page
+          </Link>
+        </div>
+      </div>
+    );
+
   const activeImage = furniture?.FurnitureImage?.[activeImageIndex]?.ImagePath; // Optional chaining and indexing
 
   return (

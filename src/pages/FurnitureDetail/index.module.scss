@@ -4,6 +4,7 @@
   @media (min-width: 496px) {
     top: 0rem;
   }
+
   .container {
     padding: 8rem 0 1.5rem 0;
 
@@ -26,6 +27,7 @@
       font-size: 16px;
       color: $c-title;
     }
+
     .productContainer {
       display: flex;
       flex-direction: column;
@@ -357,6 +359,42 @@
           margin-top: 0;
         }
       }
+    }
+  }
+}
+.errorWrapper {
+  .errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    color: $c-primary;
+  }
+
+  .errorTitle {
+    font-family: $font-f-title;
+    font-weight: $font-w-700;
+    font-size: 2rem;
+    color: $c-title;
+    margin-bottom: 1rem;
+  }
+
+  .errorMessage {
+    font-family: $font-f-secondary;
+    font-weight: $font-w-400;
+    font-size: 1.2rem;
+    color: $c-var;
+  }
+  .errorLink {
+    font-family: $font-f-secondary;
+    font-weight: $font-w-700;
+    font-size: 1rem;
+    color: $c-title;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

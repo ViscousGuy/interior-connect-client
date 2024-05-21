@@ -1,22 +1,43 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { getSingleContractor } from "../../features/contractor/contractorSlice";
+import {
+  getSingleContractor,
+  contractorReset,
+} from "../../features/contractor/contractorSlice";
 import styles from "./index.module.scss";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/components/Spinner";
 
 const ContractorDetail = () => {
-  const { contractor, isLoading } = useAppSelector((state) => state.contractor);
+  const { contractor, isLoading, isError } = useAppSelector(
+    (state) => state.contractor
+  );
   const dispatch = useAppDispatch();
   const { slug } = useParams();
 
   useEffect(() => {
     dispatch(getSingleContractor(slug));
+    // Cleanup function to reset the component state
+    return () => {
+      dispatch(contractorReset());
+    };
   }, [dispatch, slug]);
 
   if (isLoading) return <Spinner />;
+  if (isError)
+    return (
+      <div className={styles.errorWrapper}>
+        <div className={styles.errorContainer}>
+          <h2 className={styles.errorTitle}>Error</h2>
+          <p className={styles.errorMessage}>Error fetching Contractor data</p>
+          <Link to="/contractors" className={styles.errorLink}>
+            Go to Contractors Page
+          </Link>
+        </div>
+      </div>
+    );
 
   if (!contractor) return <div>Loading...</div>;
   const route = [

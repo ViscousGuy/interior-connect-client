@@ -33,6 +33,8 @@ const Furniture = () => {
   }, [searchQuery, furnitures]);
 
   if (isLoading) return <Spinner />;
+
+
   return (
     <div className={`${styles.container} main-container`}>
       <div className={styles.titleContainer}>
