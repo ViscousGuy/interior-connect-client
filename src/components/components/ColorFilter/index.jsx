@@ -8,19 +8,21 @@ const ColorFilter = ({ colors, selectedColors, setSelectedColors }) => {
       setSelectedColors([...selectedColors, color]);
     }
   };
-
+  const uniqueColors = Array.from(new Set(colors.map((color) => color.Name)));
   return (
     <div className={styles.colorFilter}>
       <h3>Color</h3>
       <div className={styles.colorOptions}>
-        {colors.map((color) => (
+        {uniqueColors.map((color, index) => (
           <div
-            key={color.Id}
+            key={index}
             className={`${styles.colorOption} ${
-              selectedColors.includes(color.Name) ? styles.selected : ""
+              selectedColors.includes(color) ? styles.selected : ""
             }`}
-            onClick={() => handleColorChange(color.Name)}
-            style={{ backgroundColor: color.Name.toLowerCase() }}
+            onClick={() => handleColorChange(color)}
+            style={{
+              backgroundColor: color ? color.toLowerCase() : "transparent",
+            }}
           />
         ))}
       </div>
