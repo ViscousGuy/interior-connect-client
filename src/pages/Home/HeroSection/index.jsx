@@ -8,6 +8,8 @@ import { Pagination, Autoplay } from "swiper/modules";
 const HeroSection = () => {
   const images = [
     "https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg",
+    "https://images.pexels.com/photos/775219/pexels-photo-775219.jpeg",
+    "https://images.pexels.com/photos/667838/pexels-photo-667838.jpeg"
   ];
 
   return (
