@@ -9,7 +9,7 @@ const HeroSection = () => {
   const images = [
     "https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg",
     "https://images.pexels.com/photos/775219/pexels-photo-775219.jpeg",
-    "https://images.pexels.com/photos/667838/pexels-photo-667838.jpeg"
+    "https://images.pexels.com/photos/667838/pexels-photo-667838.jpeg",
   ];
 
   return (
@@ -25,7 +25,7 @@ const HeroSection = () => {
             </h1>
           </header>
           <div className={styles.buttons_wrapper}>
-            <Button to="/" className={styles.button}>
+            <Button to="/furnitures" className={styles.button}>
               Buy Now
             </Button>
           </div>
